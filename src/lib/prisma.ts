@@ -1,13 +1,11 @@
-import { PrismaClient } from '../../app/generated/prisma/client'
+import { PrismaClient } from '../../app/generated/prisma/index.js'
 import { PrismaPg } from '@prisma/adapter-pg'
 
-type PrismaClientInstance = InstanceType<typeof PrismaClient>
-
 const globalForPrisma = globalThis as unknown as {
-  __prismaClient?: PrismaClientInstance
+  __prismaClient?: PrismaClient
 }
 
-function getClient(): PrismaClientInstance {
+function getClient(): PrismaClient {
   if (!globalForPrisma.__prismaClient) {
     const url = process.env.DATABASE_URL
     if (!url) throw new Error('DATABASE_URL is not set')
@@ -19,10 +17,11 @@ function getClient(): PrismaClientInstance {
 
 // Lazy proxy — defers PrismaClient construction until first property access.
 // This prevents build-time / import-time failures when DATABASE_URL is absent.
-export const prisma = new Proxy({} as PrismaClientInstance, {
-  get(_target, prop) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const prisma: PrismaClient = new Proxy({} as any, {
+  get(_target: unknown, prop: string | symbol) {
     const client = getClient()
-    const val = (client as Record<string | symbol, unknown>)[prop]
-    return typeof val === 'function' ? (val as Function).bind(client) : val
+    const val = (client as unknown as Record<string | symbol, unknown>)[prop]
+    return typeof val === 'function' ? (val as (...args: unknown[]) => unknown).bind(client) : val
   },
-})
+}) as PrismaClient
