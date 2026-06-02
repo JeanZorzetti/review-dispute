@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Review Dispute Agent
 
-## Getting Started
+AI-powered Google Business Profile review dispute automation. Watches for violating reviews, builds dispute cases, submits them, tracks removals, and bills clients per removal.
 
-First, run the development server:
+## Required Environment Variables
+
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `GOOGLE_CLIENT_ID` | Google OAuth app client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth app client secret |
+| `GOOGLE_REDIRECT_URI` | OAuth redirect URI (e.g. `https://yourapp.com/api/auth/google/callback`) |
+| `LLM_API_KEY` | API key for the LLM provider used for review triage |
+| `STRIPE_SECRET_KEY` | Stripe secret key for billing |
+| `CRON_SECRET` | Bearer token that cron jobs must supply in the `Authorization` header |
+
+## Database Setup
+
+Run migrations before starting the app:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx prisma migrate deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running with Docker
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+docker build -t review-dispute-agent .
+docker run -p 3000:3000 --env-file .env review-dispute-agent
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Cron Jobs
 
-## Learn More
+Set up two recurring HTTP POST jobs (e.g. via [cron-job.org](https://cron-job.org)) with the header `Authorization: Bearer $CRON_SECRET`:
 
-To learn more about Next.js, take a look at the following resources:
+| Job | URL | Recommended interval |
+|---|---|---|
+| Sync reviews + triage | `POST /api/cron/sync` | Every 6 hours |
+| Reconcile removals + bill | `POST /api/cron/reconcile` | Every 12 hours |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Human Actions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Endpoint | Description |
+|---|---|
+| `POST /api/disputes/:id/submit` | Mark a dispute as submitted to Google |
+| `POST /api/disputes/:id/deny` | Record a Google denial and close the case |
 
-## Deploy on Vercel
+## Google OAuth Onboarding
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Direct clients to `GET /api/auth/google?state=<client-email>` to authorize GBP access. Tokens are stored automatically on callback.
