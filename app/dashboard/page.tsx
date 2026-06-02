@@ -5,7 +5,15 @@ import { prisma } from '@/src/lib/prisma'
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
-  const client = await prisma.client.findFirst()
+  // The DB may be unreachable during the build (page-data collection runs even
+  // for force-dynamic routes). Fail soft so the build never breaks; at runtime
+  // the connection is available and the real data renders.
+  let client: Awaited<ReturnType<typeof prisma.client.findFirst>> = null
+  try {
+    client = await prisma.client.findFirst()
+  } catch {
+    return <main className="p-8">Dashboard unavailable — database not reachable.</main>
+  }
   if (!client) return <main className="p-8">No client onboarded yet.</main>
   const data = await getDashboardData(client.id)
   const rates = await removalRateByViolationType()
