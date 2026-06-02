@@ -14,7 +14,7 @@ describe('runTriage', () => {
     const ok = await prisma.review.create({ data: { clientId: client.id, externalReviewId: 'g-2', authorName: 'Real', rating: 2, text: 'roof still leaks', state: ReviewState.NEW } })
 
     const stub = mockLlm((p) =>
-      p.includes('competitor')
+      p.includes('"""I am a competitor, scam"""')
         ? JSON.stringify({ violationType: 'CONFLICT_OF_INTEREST', caseStrength: 'HIGH', confidence: 0.95 })
         : JSON.stringify({ violationType: null, caseStrength: 'NONE', confidence: 0.95 })
     )
