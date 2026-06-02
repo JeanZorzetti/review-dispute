@@ -1,0 +1,11 @@
+export enum ReviewState {
+  NEW = 'NEW',
+  ELIGIBLE = 'ELIGIBLE',
+  SKIPPED = 'SKIPPED',
+  READY = 'READY',
+  SUBMITTED = 'SUBMITTED',
+  REMOVED = 'REMOVED',
+  DENIED = 'DENIED',
+  CLOSED_LOST = 'CLOSED_LOST',
+  BILLED = 'BILLED',
+}
