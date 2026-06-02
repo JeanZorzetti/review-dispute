@@ -2,6 +2,8 @@ import { getDashboardData } from '@/src/units/dashboard/queries'
 import { removalRateByViolationType } from '@/src/units/learning/learning'
 import { prisma } from '@/src/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardPage() {
   const client = await prisma.client.findFirst()
   if (!client) return <main className="p-8">No client onboarded yet.</main>
