@@ -1,0 +1,8 @@
+[
+  { "text": "Worst pizza in town, never going back", "rating": 1, "authorName": "Joe", "expectViolation": "OFF_TOPIC", "note": "review about a restaurant on a roofing profile" },
+  { "text": "These guys are scammers, I work at a competing roofer and everyone knows it", "rating": 1, "authorName": "Rival", "expectViolation": "CONFLICT_OF_INTEREST", "note": "self-admitted competitor" },
+  { "text": "Never hired them but heard they're bad", "rating": 1, "authorName": "Anon", "expectViolation": "FAKE_NO_EXPERIENCE", "note": "no genuine experience" },
+  { "text": "BUY CHEAP FOLLOWERS at spamsite dot com", "rating": 5, "authorName": "Bot", "expectViolation": "SPAM", "note": "promotional spam" },
+  { "text": "The crew left nails in my driveway and the roof still leaks after they fixed it", "rating": 2, "authorName": "RealCustomer", "expectViolation": null, "note": "legitimate negative — must be SKIPPED" },
+  { "text": "Took three weeks longer than promised and the foreman was rude", "rating": 2, "authorName": "RealCustomer2", "expectViolation": null, "note": "legitimate negative — must be SKIPPED" }
+]
