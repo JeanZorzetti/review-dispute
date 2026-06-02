@@ -1,13 +1,81 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Client {
+  id            String   @id @default(cuid())
+  businessName  String
+  email         String   @unique
+  gbpLocationId String?
+  oauthTokens   Json?
+  pricePerRemovalCents Int @default(9900)
+  createdAt     DateTime @default(now())
+  reviews       Review[]
+  @@map("clients")
+}
+
+model Review {
+  id               String   @id @default(cuid())
+  clientId         String
+  client           Client   @relation(fields: [clientId], references: [id])
+  externalReviewId String
+  authorName       String
+  rating           Int
+  text             String
+  state            String   @default("NEW")
+  createdAt        DateTime @default(now())
+  dispute          Dispute?
+  logs             ClassificationLog[]
+  @@unique([clientId, externalReviewId])
+  @@map("reviews")
+}
+
+model Dispute {
+  id            String   @id @default(cuid())
+  reviewId      String   @unique
+  review        Review   @relation(fields: [reviewId], references: [id])
+  violationType String
+  caseStrength  String
+  argument      String
+  submittedAt   DateTime?
+  createdAt     DateTime @default(now())
+  outcome       Outcome?
+  @@map("disputes")
+}
+
+model Outcome {
+  id            String   @id @default(cuid())
+  disputeId     String   @unique
+  dispute       Dispute  @relation(fields: [disputeId], references: [id])
+  result        String
+  confirmations Int      @default(0)
+  decidedAt     DateTime @default(now())
+  charge        Charge?
+  @@map("outcomes")
+}
+
+model Charge {
+  id              String   @id @default(cuid())
+  outcomeId       String   @unique
+  outcome         Outcome  @relation(fields: [outcomeId], references: [id])
+  amountCents     Int
+  stripeChargeId  String
+  createdAt       DateTime @default(now())
+  @@map("charges")
+}
+
+model ClassificationLog {
+  id            String   @id @default(cuid())
+  reviewId      String
+  review        Review   @relation(fields: [reviewId], references: [id])
+  violationType String?
+  caseStrength  String
+  confidence    Float
+  createdAt     DateTime @default(now())
+  @@map("classification_logs")
 }
