@@ -1,19 +1,22 @@
-export async function callProvider(apiKey: string, prompt: string): Promise<string> {
-  if (!apiKey) throw new Error('LLM api key missing')
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+const DEFAULT_MODEL = 'qwen2.5:7b-instruct'
+
+// Calls a self-hosted Ollama instance. `format: 'json'` forces the model to
+// emit a syntactically valid JSON object, which the triage classifier parses.
+export async function callProvider(baseUrl: string, prompt: string): Promise<string> {
+  if (!baseUrl) throw new Error('Ollama base url missing')
+  const model = process.env.OLLAMA_MODEL ?? DEFAULT_MODEL
+  const res = await fetch(`${baseUrl.replace(/\/$/, '')}/api/generate`, {
     method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 300,
-      messages: [{ role: 'user', content: prompt }],
+      model,
+      prompt,
+      stream: false,
+      format: 'json',
+      options: { temperature: 0 },
     }),
   })
   if (!res.ok) throw new Error(`LLM provider error ${res.status}`)
-  const data = (await res.json()) as { content: { text: string }[] }
-  return data.content?.[0]?.text ?? ''
+  const data = (await res.json()) as { response?: string }
+  return data.response ?? ''
 }

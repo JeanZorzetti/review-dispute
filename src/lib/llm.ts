@@ -4,10 +4,10 @@ let _real: LlmComplete | null = null
 export function llm(): LlmComplete {
   if (!_real) {
     _real = async (prompt: string) => {
-      const apiKey = process.env.LLM_API_KEY
-      if (!apiKey) throw new Error('LLM_API_KEY not set')
+      const baseUrl = process.env.OLLAMA_BASE_URL
+      if (!baseUrl) throw new Error('OLLAMA_BASE_URL not set')
       const { callProvider } = await import('./llm.provider')
-      return callProvider(apiKey, prompt)
+      return callProvider(baseUrl, prompt)
     }
   }
   return _real

@@ -10,7 +10,8 @@ AI-powered Google Business Profile review dispute automation. Watches for violat
 | `GOOGLE_CLIENT_ID` | Google OAuth app client ID |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth app client secret |
 | `GOOGLE_REDIRECT_URI` | OAuth redirect URI (e.g. `https://yourapp.com/api/auth/google/callback`) |
-| `LLM_API_KEY` | API key for the LLM provider used for review triage |
+| `OLLAMA_BASE_URL` | Base URL of the self-hosted Ollama instance used for review triage (e.g. `http://ollama:11434`) |
+| `OLLAMA_MODEL` | Ollama model tag (defaults to `qwen2.5:7b-instruct`) |
 | `STRIPE_SECRET_KEY` | Stripe secret key for billing |
 | `CRON_SECRET` | Bearer token that cron jobs must supply in the `Authorization` header |
 
