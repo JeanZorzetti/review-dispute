@@ -19,5 +19,5 @@ export async function GET(request: Request) {
   const tokens = await tokenRes.json()
   const email = new URL(request.url).searchParams.get('state') ?? 'a@acme.com'
   await prisma.client.update({ where: { email }, data: { oauthTokens: tokens } })
-  return NextResponse.redirect(new URL('/dashboard', request.url))
+  return NextResponse.redirect(new URL('/onboarding/billing', request.url))
 }
