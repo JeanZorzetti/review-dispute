@@ -43,6 +43,8 @@ export const PRICING = {
   highlight: 'per review removed',
 }
 
+export const FAQ_TITLE = 'FAQ'
+
 export const FAQ = [
   { q: 'Is this legal?', a: "Completely. We file the same removal requests Google provides to every business — we just do it expertly and only when a review genuinely violates policy." },
   { q: 'Will Google ban my profile?', a: "No. We never abuse the system. We only dispute reviews that break Google's published rules, which is exactly what the dispute process is for. Abusing it is what gets profiles flagged — and that's the opposite of what we do." },
