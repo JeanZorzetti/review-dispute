@@ -1,10 +1,11 @@
-// Single source of truth for landing copy. PRODUCT_NAME and PRICE are placeholders
-// until naming/pricing is finalized — change here only.
+// Single source of truth for landing copy. PRODUCT_NAME is still a placeholder
+// (naming not finalized). PRICE is set: $499/removal, benchmarked decision
+// (see docs/superpowers/specs/2026-06-03-pricing-decision.md). Change here only.
 export const CONNECT_URL = '/api/auth/google'
 
 export const PRODUCT_NAME = 'ReviewShield'
 
-export const PRICE_PER_REMOVAL = '$99'
+export const PRICE_PER_REMOVAL = '$499'
 
 export const HERO = {
   h1: 'Stop losing jobs to fake reviews',
@@ -39,7 +40,7 @@ export const HOW_IT_WORKS = {
 
 export const PRICING = {
   title: 'Pay only for results',
-  body: 'No monthly fee. No retainer. No removal, no charge.',
+  body: 'Less than the cost of one lost job. No monthly fee, no retainer — no removal, no charge.',
   highlight: 'per review removed',
 }
 
