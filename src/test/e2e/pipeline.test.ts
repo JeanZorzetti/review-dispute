@@ -10,13 +10,14 @@ import { buildDisputes } from '../../units/dispute/builder'
 import { markSubmitted } from '../../units/executor/executor'
 import { reconcile } from '../../units/tracker/tracker'
 import { chargeRemovals } from '../../units/billing/billing'
+import type { StripeGateway } from '../../lib/stripe'
 
 beforeEach(async () => { await resetDb() })
 
 describe('full pipeline NEW → BILLED', () => {
   it('takes a violating review all the way to BILLED and SKIPs a legitimate one', async () => {
     const client = await prisma.client.create({
-      data: { businessName: 'ACME Roofing', email: 'e2e@test.com', gbpLocationId: 'loc-1', pricePerRemovalCents: 9900 }
+      data: { businessName: 'ACME Roofing', email: 'e2e@test.com', gbpLocationId: 'loc-1', pricePerRemovalCents: 9900, billingMethod: 'card', stripeCustomerId: 'cus_e2e' }
     })
 
     const present = [
@@ -49,14 +50,21 @@ describe('full pipeline NEW → BILLED', () => {
     await reconcile(client.id, gbpRemoved)
 
     // 6. bill
-    const fakeStripe = { createCharge: vi.fn(async () => ({ id: 'ch_e2e' })) }
+    const fakeStripe: StripeGateway = {
+      getOrCreateCustomer: vi.fn(async () => 'cus_e2e'),
+      createSetupIntent: vi.fn(async () => 'seti_secret'),
+      chargeSavedCard: vi.fn(async () => ({ id: 'ch_e2e' })),
+      defaultPaymentMethod: vi.fn(async () => 'pm_e2e'),
+      createInvoice: vi.fn(async () => ({ invoiceId: 'in_e2e' })),
+      verifyWebhook: vi.fn(),
+    }
     await chargeRemovals(client.id, fakeStripe)
 
     const bad = await prisma.review.findFirstOrThrow({ where: { externalReviewId: 'bad-1' } })
     const ok = await prisma.review.findFirstOrThrow({ where: { externalReviewId: 'ok-1' } })
     expect(bad.state).toBe(ReviewState.BILLED)
     expect(ok.state).toBe(ReviewState.SKIPPED)
-    expect(fakeStripe.createCharge).toHaveBeenCalledTimes(1)
+    expect(fakeStripe.chargeSavedCard).toHaveBeenCalledTimes(1)
     expect(await prisma.charge.count()).toBe(1)
   })
 })
