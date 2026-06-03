@@ -3,10 +3,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-# EasyPanel passes DATABASE_URL as a build-arg; expose it to `next build` so
-# any server component touched during page-data collection can reach the DB.
+# EasyPanel passes service env vars as build-args. Expose at BUILD time:
+# - DATABASE_URL: server components touched during page-data collection reach the DB.
+# - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: NEXT_PUBLIC_* vars are inlined into the client
+#   bundle at build time (NOT read at runtime), so it must be present here or the
+#   Payment Element silently has no key.
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
+ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
 RUN npx prisma generate && npm run build
 
 FROM node:22-alpine AS runner
