@@ -14,7 +14,8 @@ export function verifyPassword(input: string): boolean {
 }
 
 function sign(payload: string): string {
-  const secret = process.env.ADMIN_SESSION_SECRET ?? ''
+  const secret = process.env.ADMIN_SESSION_SECRET
+  if (!secret) throw new Error('ADMIN_SESSION_SECRET is not set')
   return createHmac('sha256', secret).update(payload).digest('hex')
 }
 
@@ -27,11 +28,15 @@ export function verifySessionToken(token: string | undefined): boolean {
   if (!token) return false
   const [payload, mac] = token.split('.')
   if (!payload || !mac) return false
-  const expected = sign(payload)
-  const a = Buffer.from(mac)
-  const b = Buffer.from(expected)
-  if (a.length !== b.length) return false
-  return timingSafeEqual(a, b)
+  try {
+    const expected = sign(payload)
+    const a = Buffer.from(mac)
+    const b = Buffer.from(expected)
+    if (a.length !== b.length) return false
+    return timingSafeEqual(a, b)
+  } catch {
+    return false
+  }
 }
 
 export async function requireAdmin(): Promise<void> {

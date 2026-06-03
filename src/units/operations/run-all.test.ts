@@ -18,5 +18,6 @@ describe('run-all operations', () => {
     const { runReconcileAllClients } = await import('./run-all')
     const result = await runReconcileAllClients()
     expect(result.clients).toBe(1)
+    expect(result.reconciled).toBe(0)
   })
 })

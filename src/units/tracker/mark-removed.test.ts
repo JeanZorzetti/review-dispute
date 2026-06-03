@@ -35,4 +35,14 @@ describe('markRemovedManually', () => {
     const dispute = await prisma.dispute.create({ data: { reviewId: review.id, violationType: 'OFF_TOPIC', caseStrength: 'HIGH', argument: 'a' } })
     await expect(markRemovedManually(dispute.id)).rejects.toThrow(/illegal transition/i)
   })
+
+  it('is a no-op when the review is already REMOVED', async () => {
+    const client = await prisma.client.create({ data: { businessName: 'ACME', email: 'd@mr.com' } })
+    const review = await prisma.review.create({ data: { clientId: client.id, externalReviewId: 'g-4', authorName: 'X', rating: 1, text: 't', state: ReviewState.REMOVED } })
+    const dispute = await prisma.dispute.create({ data: { reviewId: review.id, violationType: 'OFF_TOPIC', caseStrength: 'HIGH', argument: 'a', submittedAt: new Date() } })
+    await prisma.outcome.create({ data: { disputeId: dispute.id, result: 'REMOVED', confirmations: 2 } })
+    await markRemovedManually(dispute.id) // must not throw
+    const r = await prisma.review.findUniqueOrThrow({ where: { id: review.id } })
+    expect(r.state).toBe(ReviewState.REMOVED)
+  })
 })

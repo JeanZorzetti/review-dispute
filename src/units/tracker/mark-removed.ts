@@ -7,6 +7,7 @@ export async function markRemovedManually(disputeId: string): Promise<void> {
     where: { id: disputeId },
     include: { review: true, outcome: true },
   })
+  if (dispute.review.state === ReviewState.REMOVED) return
   assertTransition(dispute.review.state as ReviewState, ReviewState.REMOVED)
   await prisma.$transaction(async (tx) => {
     if (dispute.outcome) {

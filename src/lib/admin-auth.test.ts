@@ -30,4 +30,9 @@ describe('admin-auth', () => {
     process.env.ADMIN_SESSION_SECRET = 'different'
     expect(verifySessionToken(token)).toBe(false)
   })
+  it('verifySessionToken returns false when ADMIN_SESSION_SECRET is unset', () => {
+    const token = createSessionToken()
+    delete process.env.ADMIN_SESSION_SECRET
+    expect(verifySessionToken(token)).toBe(false)
+  })
 })
