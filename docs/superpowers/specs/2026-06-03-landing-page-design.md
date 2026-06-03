@@ -62,11 +62,14 @@ src/
 │   └── Footer.tsx
 ```
 
-- **Estilo:** o projeto foi scaffoldado **sem Tailwind** (`--no-tailwind`). O CSS já em uso é CSS Modules + globals. Manter o padrão: um `landing.module.css` por seção ou um módulo compartilhado com as variáveis de cor. NÃO introduzir Tailwind agora (evita reescrever config e divergir do resto do projeto).
+- **Stack visual:** **Tailwind CSS + Framer Motion + shadcn/ui.** O projeto foi scaffoldado `--no-tailwind`, então a primeira tarefa do plano é **adicionar Tailwind** (install + `tailwind.config`/`postcss` + diretivas no `globals.css`) e **inicializar shadcn/ui** (`components.json`, utils, tema). O `app/page.module.css` placeholder do scaffold é deletado junto com o placeholder. Isso só afeta a landing — nenhum código existente usa CSS Modules de forma significativa.
+  - **Tema:** mapear as cores Bold Contractor como tokens no Tailwind (`background: #16181d`, `surface: #1c1f26`, `accent: #ff5b35`, texto `#fff`/`#b8bcc4`). shadcn lê esses tokens via CSS variables.
+  - **Framer Motion:** animações de entrada por seção (`whileInView` fade/slide-up com `viewport once`), hero com stagger suave na carga, e micro-interações de hover nos CTAs. Componentes que usam Framer são client components (`'use client'`); manter o resto como server components.
+  - **shadcn/ui:** usar para o **Accordion** (FAQ) e o **Button** (CTAs). Não trazer componentes além do necessário (YAGNI).
 - **Fonte de verdade:** `site-config.ts` exporta `PRODUCT_NAME`, `PRICE_PER_REMOVAL`, `CONNECT_URL = '/api/auth/google'`. Toda seção lê daqui — trocar nome/preço é um lugar só.
-- **CTA:** todos os botões "Connect Google" são `<a href={CONNECT_URL}>` — leva ao OAuth já existente. Sem JS.
-- **FAQ:** único componente interativo (accordion). Client component pequeno e isolado.
-- **Responsivo:** mobile-first (contractor provavelmente abre no celular). Hero e "como funciona" empilham em coluna no mobile.
+- **CTA:** botões "Connect Google" são o `Button` (shadcn) dentro de um `<a href={CONNECT_URL}>` — leva ao OAuth já existente.
+- **FAQ:** componente interativo usando o Accordion do shadcn (`'use client'`).
+- **Responsivo:** mobile-first com utilitários Tailwind (contractor provavelmente abre no celular). Hero e "como funciona" empilham em coluna no mobile.
 - **SEO/meta:** `metadata` export no `page.tsx` (title, description, OG tags) — importa pro canal de distribuição.
 
 ## Out of scope (YAGNI)
@@ -74,14 +77,14 @@ src/
 - Prova social / depoimentos (sem dados reais — adicionar depois).
 - Waitlist / captura de email (CTA é self-service "Connect Google").
 - Blog, multi-página, i18n (uma página, inglês).
-- Tailwind ou nova lib de UI.
-- Animações pesadas (pode ter micro-transições CSS, mas nada de GSAP/Lenis nesta entrega).
+- Scroll-jacking / GSAP / Lenis (Framer Motion `whileInView` é suficiente; nada de scroll suave customizado).
+- Componentes shadcn além de Accordion + Button.
 - Naming/branding final e preço definitivo (placeholders em `site-config.ts`).
 
 ## Verificação
 
-- `npm run build` passa (landing é estática, não toca DB — não repete o problema do `/dashboard`).
-- `npm run dev` → abrir `/` e conferir as 7 seções na ordem, no estilo Bold Contractor, responsivo no mobile (DevTools).
+- `npm run build` passa com Tailwind configurado (landing é estática, não toca DB — não repete o problema do `/dashboard`).
+- `npm run dev` → abrir `/` e conferir as 7 seções na ordem, no estilo Bold Contractor, com as animações Framer Motion disparando ao scrollar, responsivo no mobile (DevTools).
 - Todos os botões "Connect Google" apontam para `/api/auth/google` (redireciona pro OAuth — 307).
 - FAQ accordion abre/fecha.
 - Lighthouse rápido: sem erros graves de acessibilidade/contraste (laranja sobre escuro deve passar AA).
