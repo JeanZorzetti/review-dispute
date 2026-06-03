@@ -47,7 +47,8 @@ export function stripe(): StripeGateway {
       async createSetupIntent(customerId) {
         const s = client()
         const si = await s.setupIntents.create({ customer: customerId, payment_method_types: ['card'] })
-        return si.client_secret ?? ''
+        if (!si.client_secret) throw new Error(`SetupIntent ${si.id} has no client_secret (status: ${si.status})`)
+        return si.client_secret
       },
       async chargeSavedCard(customerId, paymentMethodId, amountCents, description) {
         const s = client()
@@ -69,8 +70,8 @@ export function stripe(): StripeGateway {
       },
       async createInvoice(customerId, amountCents, description) {
         const s = client()
-        await s.invoiceItems.create({ customer: customerId, amount: amountCents, currency: 'usd', description })
         const invoice = await s.invoices.create({ customer: customerId, collection_method: 'send_invoice', days_until_due: 7 })
+        await s.invoiceItems.create({ customer: customerId, amount: amountCents, currency: 'usd', description, invoice: invoice.id! })
         const finalized = await s.invoices.finalizeInvoice(invoice.id!)
         return { invoiceId: finalized.id! }
       },
