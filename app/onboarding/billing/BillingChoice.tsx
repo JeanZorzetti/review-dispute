@@ -48,6 +48,10 @@ export function BillingChoice({ clientId }: { clientId: string }) {
     if (res.setupClientSecret) setSecret(res.setupClientSecret)
   }
 
+  if (secret && !stripePromise) {
+    return <p className="text-sm text-accent">Card payments are not configured yet. Please choose invoice, or contact support.</p>
+  }
+
   if (secret && stripePromise) {
     return (
       <Elements stripe={stripePromise} options={{ clientSecret: secret }}>
