@@ -12,8 +12,12 @@ export function Footer() {
           {FOOTER.cta}
         </a>
       </div>
-      <div className="mt-16 border-t border-line pt-8 text-xs text-muted">
-        © {new Date().getFullYear()} {PRODUCT_NAME}. All rights reserved.
+      <div className="mt-16 border-t border-line pt-8 flex flex-col items-center gap-3">
+        <nav className="flex gap-6 text-xs text-muted">
+          <a href="/blog" className="hover:text-white transition-colors">Blog</a>
+          <a href={CONNECT_URL} className="hover:text-white transition-colors">Get Started</a>
+        </nav>
+        <p className="text-xs text-muted">© {new Date().getFullYear()} {PRODUCT_NAME}. All rights reserved.</p>
       </div>
     </footer>
   )
