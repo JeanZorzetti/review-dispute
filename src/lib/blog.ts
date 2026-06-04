@@ -89,10 +89,11 @@ export function getCluster(cluster: string): { pillar: Post | null; members: Pos
 }
 
 export function getRelated(post: Post, limit = 3): Post[] {
+  const all = getAllPosts() // read the directory once, not per internalLink
   const explicit = (post.internalLinks ?? [])
-    .map((s) => getPostBySlug(s))
+    .map((s) => all.find((p) => p.slug === s) ?? null)
     .filter((p): p is Post => p !== null)
-  const siblings = getAllPosts().filter((p) => p.cluster === post.cluster && p.slug !== post.slug)
+  const siblings = all.filter((p) => p.cluster === post.cluster && p.slug !== post.slug)
   const merged: Post[] = []
   for (const p of [...explicit, ...siblings]) {
     if (!merged.find((m) => m.slug === p.slug)) merged.push(p)
