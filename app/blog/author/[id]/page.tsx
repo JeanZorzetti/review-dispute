@@ -32,7 +32,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ id: str
     description: author.bio,
     knowsAbout: author.knowsAbout,
     url: `${SITE_URL}/blog/author/${id}`,
-    sameAs: author.sameAs,
+    ...(author.sameAs && author.sameAs.length > 0 ? { sameAs: author.sameAs } : {}),
   }
   return (
     <main className="mx-auto max-w-3xl px-5 py-12 md:px-8">
