@@ -41,9 +41,26 @@ const config: Config = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
+  		},
+  		typography: {
+  			invert: {
+  				css: {
+  					'--tw-prose-body': '#cfd3da',
+  					'--tw-prose-headings': '#ffffff',
+  					'--tw-prose-links': '#ff5b35',
+  					'--tw-prose-bold': '#ffffff',
+  					'--tw-prose-bullets': '#ff5b35',
+  					'--tw-prose-quote-borders': '#ff5b35',
+  					'--tw-prose-hr': '#2a2e36',
+  					'--tw-prose-th-borders': '#2a2e36',
+  					'--tw-prose-td-borders': '#2a2e36',
+  					'--tw-prose-code': '#ffffff',
+  					'--tw-prose-pre-bg': '#1c1f26'
+  				}
+  			}
   		}
   	}
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 }
 export default config

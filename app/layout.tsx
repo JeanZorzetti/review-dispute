@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SITE_URL } from "@/src/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'ReviewShield — Remove fake Google reviews, pay only when they come down',
   description:
     'We remove policy-violating Google reviews for contractors. Fake, competitor, and off-topic reviews disputed and removed. You only pay when one comes down.',
