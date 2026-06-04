@@ -1,0 +1,242 @@
+---
+title: "Automating Review Requests Without Violating Google Policy"
+description: "Learn how to automate review requests compliantly — CRM triggers, SMS tools, and the gating mistake that gets contractors penalized."
+keywords: ["automating review requests google policy", "review request automation", "google review policy contractors", "automated review requests", "review gating"]
+datePublished: "2026-06-04"
+author: "marcus-reyes"
+cluster: "getting-reviews"
+pillar: false
+heroAlt: "Contractor on phone setting up automated review request workflow on laptop"
+internalLinks:
+  - how-to-get-more-google-reviews-contractors
+  - best-time-to-ask-for-a-review
+  - review-request-templates
+  - is-it-against-google-rules-to-ask-for-reviews
+  - google-review-policy-explained
+  - build-review-generation-system
+faqs:
+  - q: "Is automating Google review requests against Google policy?"
+    a: "No — automation itself is allowed. What's prohibited is review gating: filtering customers before they hit the review link, so only happy customers get asked. Sending every completed-job customer the same automated request is compliant."
+  - q: "What is review gating and why does it violate policy?"
+    a: "Review gating is any system that first asks 'how did we do?' and then only routes positive responders to Google. Google's policy explicitly bans discouraging or blocking negative reviews. Gating artificially inflates ratings and violates the Terms of Service."
+  - q: "What platforms can I use to automate review requests?"
+    a: "CRM tools like Jobber, ServiceTitan, and Housecall Pro have built-in review request automations. For SMS, platforms like Podium, NiceJob, or even Twilio with a simple trigger work well. The compliance lives in how you configure them, not which tool you use."
+  - q: "How long after a job should the automated request fire?"
+    a: "24–48 hours after job completion is the sweet spot for most trades. Roofing and larger HVAC replacements can wait up to 72 hours to let the customer see the finished result. See the full timing breakdown at the link below."
+  - q: "Can I send a follow-up if the customer doesn't leave a review?"
+    a: "Yes — one follow-up, sent 4–7 days after the first message, is reasonable and widely used. More than two total requests per job starts to feel like pressure and can backfire on your brand even if it doesn't violate policy."
+takeaways:
+  - "Automation is allowed — review gating is not. The line is whether every customer gets the same ask regardless of their satisfaction."
+  - "CRM-triggered SMS or email 24–48 hours after job close is the most reliable compliant automation pattern."
+  - "Never pre-screen with a satisfaction question before routing to Google. Send the review link directly in the first message."
+  - "One follow-up after 4–7 days is fine. More than two total touches per job is overkill and looks desperate."
+---
+
+<KeyTakeaways>
+  <ul>
+    <li>Automation is allowed — review gating is not. Every customer gets the same ask, no filtering.</li>
+    <li>CRM-triggered SMS 24–48 hours post-job-close is the gold standard for compliant automation.</li>
+    <li>Never pre-screen satisfaction before routing to Google. The review link goes in the first message.</li>
+    <li>One follow-up at day 4–7 is reasonable. Two total touches per job is the ceiling.</li>
+  </ul>
+</KeyTakeaways>
+
+Most contractors know they should be asking for reviews. The ones who actually get them consistently have one thing in common: **they don't rely on themselves to remember to ask.** They've wired up a system that fires automatically every time a job closes.
+
+But automation introduces a new risk. When you build a review request workflow without understanding Google's rules, you can accidentally engineer something that violates policy — and put your entire Google Business Profile at risk. This article walks through exactly how to build a compliant review automation from scratch, and what the dangerous mistake looks like so you can avoid it.
+
+---
+
+## Is Automating Review Requests Allowed Under Google Policy?
+
+<AnswerBox>
+Yes. Google allows businesses to ask customers for reviews — including via automated systems. What Google prohibits is **review gating**: any filtering step that routes unhappy customers away from Google before they can leave honest feedback.
+</AnswerBox>
+
+Automation itself is neutral. A system that texts every single completed-job customer the same message with the same Google review link is perfectly compliant. The problem isn't the automation — it's what some people wire into the automation that creates violations.
+
+[Google's review policy](/blog/google-review-policy-explained) is clear on this: businesses cannot "discourage or prohibit negative reviews" or "selectively solicit positive reviews from customers." The moment your workflow adds a decision branch — *only send the Google link if they answer the satisfaction question positively* — you've crossed the line.
+
+---
+
+## What Is Review Gating and Why Is It Dangerous?
+
+<Definition term="Review Gating">
+A practice where a business first surveys a customer's satisfaction and only routes happy customers to leave a public Google review, while steering unhappy customers to a private feedback form instead.
+</Definition>
+
+Review gating is the most common compliance mistake contractors make when they try to get smarter with automation. It feels logical — why send an unhappy customer to Google? But Google explicitly bans it because it artificially inflates your rating and suppresses legitimate negative feedback.
+
+Here's what a gated workflow looks like:
+
+1. Job closes → SMS fires: *"How would you rate our service today? Reply 1–5."*
+2. Customer replies 4 or 5 → second SMS fires: *"Great! Mind leaving us a Google review?"*
+3. Customer replies 1, 2, or 3 → second SMS fires: *"We're sorry to hear that. Let us know what we can improve at [private form]."*
+
+That's a textbook gating violation. The second message is different depending on the score. Google bans this pattern explicitly.
+
+<Callout type="warning">
+If your current automation includes a satisfaction rating question before the Google review link, you may already be gating. Audit your workflow now — a flagged profile can lose its ability to receive new reviews entirely.
+</Callout>
+
+---
+
+## What Does Compliant Automation Actually Look Like?
+
+<AnswerBox>
+A compliant workflow sends every completed-job customer the same message with a direct link to your Google review page — no pre-screening, no conditional routing, no satisfaction filter.
+</AnswerBox>
+
+Here's the simple, compliant version of the same workflow:
+
+1. Job closes → automated trigger fires in your CRM
+2. Every customer receives the same SMS 24–48 hours later: *"Hi [First Name], thanks for choosing [Company]. If you have a minute, we'd appreciate an honest Google review — it helps other homeowners find us: [Google review link]"*
+3. No reply or no review after 4–7 days → one follow-up message: *"Just a quick follow-up — did you get a chance to leave us a review? It means a lot to the team: [Google review link]"*
+
+That's it. No branching. No filtering. Everyone gets the same ask, and everyone gets the same link. This is the [right way to ask for reviews at scale](/blog/how-to-get-more-google-reviews-contractors).
+
+---
+
+## Which Tools Work Best for Automated Review Requests?
+
+The good news: you don't need custom software. Most field service management platforms already have review automation built in.
+
+### CRM Platforms with Native Review Automation
+
+**Jobber** — Has a "client follow-ups" feature that fires review requests automatically when a job is marked complete. The link goes straight to Google. No gating built in.
+
+**ServiceTitan** — More enterprise, more configuration. Make sure when you set it up that the message sends to *all* completed jobs, not filtered by job rating or technician score.
+
+**Housecall Pro** — Simple and contractor-focused. Review requests are part of their automated follow-up suite and they route directly to Google.
+
+**FieldEdge, Workiz, mHelpDesk** — All have similar post-job automation. Check that the trigger is "job completed" and not "customer satisfaction score above X."
+
+### SMS-First Platforms
+
+If you're not using a field management CRM or want more SMS customization:
+
+- **Podium** — Built specifically for review generation. Strong for HVAC and plumbing. Be aware their older "check-in" flows had conditional routing — audit your setup.
+- **NiceJob** — Review automation focused tool. They're explicit about Google policy compliance.
+- **Birdeye** — Multi-location friendly, used by larger roofing companies with multiple crews.
+
+### DIY with Twilio + Zapier
+
+For contractors who want full control: a Zapier zap that triggers when a job hits "complete" status in your CRM, fires a Twilio SMS with the review link. Simple, cheap, fully transparent. You control exactly what goes in the message.
+
+<Callout type="tip">
+Whatever platform you use, test the workflow end-to-end on your own phone before going live. Confirm the message lands, the link opens correctly on mobile, and there is no intermediate satisfaction screen before the Google form.
+</Callout>
+
+---
+
+## How Should You Time the Automated Request?
+
+Timing matters more than most contractors realize. Send too fast and the customer hasn't had a chance to appreciate the finished work. Wait too long and the experience has faded.
+
+<StatGrid>
+  <Stat value="24–48h" label="Optimal send window after job completion" source="Industry best practice across field service trades" />
+  <Stat value="72h" label="For larger installs (roofing, HVAC replacement)" source="Customer satisfaction research, home services" />
+  <Stat value="4–7 days" label="Follow-up timing if no review left" source="Contractor review generation benchmarks" />
+</StatGrid>
+
+For a **roofer**: the customer should be able to see the finished roof and confirm there's no mess left behind before you ask. 48 hours is right.
+
+For an **HVAC tech**: if it was a service call or tune-up, 24 hours works. If you installed a new system, give them 48–72 hours to feel the difference.
+
+For a **plumber**: most plumbing jobs are urgent. The relief is immediate. 24 hours after fix confirmation works well.
+
+[See the full timing breakdown with research-backed data](/blog/best-time-to-ask-for-a-review) before you set your trigger delay.
+
+---
+
+## What Should the Automated Message Actually Say?
+
+The message content is where a lot of contractors leave performance on the table. Generic messages get ignored. Specific, personal ones get action.
+
+**What works:**
+
+> "Hi Sarah — the team just finished your HVAC install on Oak Street. If we did our job right, a quick Google review would mean the world to us: [link]. Takes about 60 seconds."
+
+**What doesn't work:**
+
+> "Dear Valued Customer, Please take a moment to review our business on Google. Your feedback is important to us. [link]"
+
+The difference: the first message references the job, uses the customer's name, and sets a realistic time expectation. The second sounds like a form letter and will be ignored.
+
+**Required elements in every automated request:**
+- Customer's first name
+- Reference to the specific job or trade (not just "our service")
+- Direct Google review link — no intermediate landing page
+- Time expectation (60 seconds, one minute, quick)
+- One sentence on *why* it matters (helps other homeowners find you)
+
+[Use proven templates built for contractors](/blog/review-request-templates) rather than writing from scratch — just make sure the template you choose doesn't include a satisfaction pre-screen.
+
+---
+
+## What About the "How Did We Do?" Satisfaction Check — Can I Use It at All?
+
+You can ask for internal feedback. You cannot use that feedback to decide who gets asked for a public review.
+
+If your CRM has a post-job satisfaction survey, that data is useful for your operations — flagging which techs are struggling, which types of jobs generate complaints, which crews leave job sites messy. Use it for that.
+
+But the survey response cannot gate the review request. Everyone who completes a job gets the review link, survey responders or not, high score or low.
+
+<Callout type="info">
+Some platforms market a "negative review deflection" feature. This is exactly what Google prohibits. If your software includes this, turn it off. The risk to your profile is not worth the short-term protection of keeping a handful of negative reviews off Google.
+</Callout>
+
+---
+
+## What Are the Risks If You Get Caught Gating?
+
+Google doesn't send a warning email. If they detect systematic review gating — often triggered by unusual patterns in your review velocity, complaints from customers, or a competitor reporting your profile — they can:
+
+- Remove a batch of your reviews (including real, legitimate ones)
+- Suspend your ability to receive new reviews
+- In severe cases, suspend the Google Business Profile entirely
+
+For a roofing company or HVAC contractor where Google Maps drives 30–50% of leads, a profile suspension is a serious business event. The [full scope of what happens when Google flags your profile](/blog/is-it-against-google-rules-to-ask-for-reviews) is worth understanding before you set any automation live.
+
+---
+
+## Step-by-Step: Build a Compliant Review Automation This Week
+
+Here's the exact build sequence for a contractor starting from zero:
+
+**Step 1:** Choose your trigger event. "Job marked complete" in your CRM is the cleanest option. Avoid triggers based on invoice paid — payment timing is too variable.
+
+**Step 2:** Set the delay. 24 hours for service calls, 48 hours for installs, 72 hours for major replacement jobs.
+
+**Step 3:** Write one message. First name, job reference, direct Google link, time expectation. No satisfaction question. No conditional branches.
+
+**Step 4:** Add one follow-up. 4–7 days later, same link, shorter message. Something like: *"Hey [Name] — did you get a chance to leave us that Google review? It really helps the team."*
+
+**Step 5:** Test it yourself. Complete a dummy job in your CRM, put your own phone number in, and let it fire. Confirm the link works and there's no intermediate screen.
+
+**Step 6:** Check your reply handling. If a customer replies to the SMS with a complaint instead of a review, that needs to go to a human — not an auto-responder that asks them again.
+
+**Step 7:** Review the automation quarterly. Platforms update their flows. A tool that was compliant six months ago may have added a gating feature in an update. [Building a full review generation system](/blog/build-review-generation-system) means auditing it regularly, not just setting it and forgetting.
+
+---
+
+<CTA />
+
+---
+
+## Frequently Asked Questions
+
+**Is automating Google review requests against Google policy?**
+No — automation itself is allowed. What's prohibited is review gating: filtering customers before they hit the review link, so only happy customers get asked. Sending every completed-job customer the same automated request is compliant.
+
+**What is review gating and why does it violate policy?**
+Review gating is any system that first asks "how did we do?" and then only routes positive responders to Google. Google's policy explicitly bans discouraging or blocking negative reviews. Gating artificially inflates ratings and violates the Terms of Service.
+
+**What platforms can I use to automate review requests?**
+CRM tools like Jobber, ServiceTitan, and Housecall Pro have built-in review request automations. For SMS, platforms like Podium, NiceJob, or even Twilio with a simple trigger work well. The compliance lives in how you configure them, not which tool you use.
+
+**How long after a job should the automated request fire?**
+24–48 hours after job completion is the sweet spot for most trades. Roofing and larger HVAC replacements can wait up to 72 hours to let the customer see the finished result.
+
+**Can I send a follow-up if the customer doesn't leave a review?**
+Yes — one follow-up, sent 4–7 days after the first message, is reasonable and widely used. More than two total requests per job starts to feel like pressure and can backfire on your brand even if it doesn't violate policy.
