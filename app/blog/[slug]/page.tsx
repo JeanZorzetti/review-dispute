@@ -10,6 +10,8 @@ import { JsonLd } from '@/src/components/seo/JsonLd'
 import { blogPostingSchema, faqPageSchema, breadcrumbSchema } from '@/src/lib/schema'
 import { clusterLabel } from '@/src/lib/clusters'
 import { SITE_URL } from '@/src/lib/site'
+import { getAuthor } from '@/content/authors'
+import { AuthorCard } from '@/src/components/blog/AuthorCard'
 import Link from 'next/link'
 
 export const dynamicParams = false
@@ -46,11 +48,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!post) notFound()
 
   const related = getRelated(post, 3)
-  // Author resolution is Phase 3 (content/authors.ts). For now use a sensible default.
-  const author = { name: 'The ReviewShield Team', role: 'Reputation Specialists' }
+  const author = getAuthor(post.author)
 
   const schemas = [
-    blogPostingSchema(post, author),
+    blogPostingSchema(post, {
+      name: author.name,
+      role: author.role,
+      knowsAbout: author.knowsAbout,
+      url: `${SITE_URL}/blog/author/${author.id}`,
+    }),
     breadcrumbSchema([
       { name: 'Home', url: '/' },
       { name: 'Blog', url: '/blog' },
@@ -73,7 +79,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <header className="mt-4">
         <h1 className="text-3xl font-black uppercase leading-tight md:text-4xl">{post.title}</h1>
         <div className="mt-3 text-sm text-muted">
-          {author.name} · {new Date(post.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · {post.readingMinutes} min read
+          <Link href={`/blog/author/${author.id}`} className="hover:text-accent">{author.name}</Link>, {author.role} · {new Date(post.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · {post.readingMinutes} min read
         </div>
       </header>
 
@@ -107,6 +113,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
       )}
+
+      <AuthorCard author={author} />
 
       {related.length > 0 && (
         <section className="mt-12 border-t border-line pt-8">

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:blog": "tsx scripts/check-blog.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
