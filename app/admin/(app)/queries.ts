@@ -1,5 +1,6 @@
 import { prisma } from '@/src/lib/prisma'
 import { ReviewState } from '@/src/domain/states'
+import { parseStoredTokens } from '@/src/lib/google-oauth'
 
 export interface DisputeRow {
   disputeId: string
@@ -54,13 +55,13 @@ export async function getClientsWithCounts(): Promise<ClientRow[]> {
     const counts: Record<string, number> = {}
     for (const s of Object.values(ReviewState)) counts[s] = 0
     for (const r of c.reviews) counts[r.state]++
-    const tokens = c.oauthTokens as { access_token?: string } | null
+    const tokens = parseStoredTokens(c.oauthTokens)
     return {
       id: c.id,
       businessName: c.businessName,
       email: c.email,
       gbpLocationId: c.gbpLocationId,
-      connected: Boolean(tokens?.access_token),
+      connected: Boolean(tokens?.access_token ?? tokens?.refresh_token),
       counts,
     }
   })

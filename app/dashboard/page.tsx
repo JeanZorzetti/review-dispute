@@ -1,16 +1,20 @@
+import { redirect } from 'next/navigation'
 import { getDashboardData } from '@/src/units/dashboard/queries'
 import { prisma } from '@/src/lib/prisma'
+import { requireClientId } from '@/src/lib/client-auth'
 import { PRODUCT_NAME } from '@/src/components/landing/site-config'
 
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
+  const clientId = await requireClientId()
+
   // The DB may be unreachable during the build (page-data collection runs even
   // for force-dynamic routes). Fail soft so the build never breaks; at runtime
   // the connection is available and the real data renders.
   let client: Awaited<ReturnType<typeof prisma.client.findFirst>> = null
   try {
-    client = await prisma.client.findFirst()
+    client = await prisma.client.findUnique({ where: { id: clientId } })
   } catch {
     return (
       <main className="flex min-h-screen items-center justify-center bg-bg p-8 text-muted">
@@ -19,22 +23,8 @@ export default async function DashboardPage() {
     )
   }
 
-  if (!client) {
-    return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-bg p-8 text-center text-white">
-        <h1 className="text-2xl font-black uppercase">Almost there</h1>
-        <p className="mt-3 max-w-md text-muted">
-          Connect your Google Business Profile to start protecting your reviews.
-        </p>
-        <a
-          href="/api/auth/google"
-          className="mt-6 rounded-md bg-accent px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-white transition-transform hover:scale-105"
-        >
-          Connect Google
-        </a>
-      </main>
-    )
-  }
+  // Valid session but the client row is gone — clear stale access via login.
+  if (!client) redirect('/login')
 
   const data = await getDashboardData(client.id)
 

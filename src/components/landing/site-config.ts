@@ -1,5 +1,5 @@
-// Single source of truth for landing copy. PRODUCT_NAME is still a placeholder
-// (naming not finalized). PRICE is set: $499/removal, benchmarked decision
+// Single source of truth for landing copy. PRODUCT_NAME is official:
+// ReviewShield (decided 2026-06-10). PRICE is set: $499/removal, benchmarked
 // (see docs/superpowers/specs/2026-06-03-pricing-decision.md). Change here only.
 export const CONNECT_URL = '/api/auth/google'
 

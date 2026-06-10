@@ -2,6 +2,8 @@ import { prisma } from '../../lib/prisma'
 import { ReviewState } from '../../domain/states'
 import { assertTransition } from '../../domain/transitions'
 import type { StripeGateway, ClientForBilling } from '../../lib/stripe'
+import { sendEmail } from '../../lib/email'
+import { reviewRemovedEmail } from '../../lib/email-templates'
 
 export async function chargeRemovals(clientId: string, gateway: StripeGateway): Promise<void> {
   const client = await prisma.client.findUniqueOrThrow({ where: { id: clientId } })
@@ -49,5 +51,17 @@ export async function chargeRemovals(clientId: string, gateway: StripeGateway): 
     }
 
     await prisma.review.update({ where: { id: r.id }, data: { state: ReviewState.BILLED } })
+
+    // The "we removed it" email is the product moment — but it must never
+    // break billing: sendEmail fails soft by design.
+    await sendEmail(
+      reviewRemovedEmail(
+        client.email,
+        client.businessName,
+        { authorName: r.authorName, rating: r.rating },
+        client.pricePerRemovalCents,
+        client.billingMethod
+      )
+    )
   }
 }
