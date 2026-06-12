@@ -106,3 +106,31 @@ export function magicLinkEmail(to: string, link: string): EmailMessage {
     ),
   }
 }
+
+export function checkerAssessmentEmail(
+  to: string,
+  verdict: { violationType: string | null; caseStrength: string; eligible: boolean }
+): EmailMessage {
+  const verdictLine = verdict.eligible
+    ? p(
+        `Our analysis found that the review you checked appears to violate Google's review policies (<strong>${verdict.violationType ?? 'policy violation'}</strong>, case strength: ${verdict.caseStrength}). Reviews like this can be disputed and removed.`
+      )
+    : p(
+        `The review you checked didn't show a clear policy violation on its own — but text is only part of the picture. Reviewer history, posting patterns, and conflict-of-interest signals often make the difference, and we check those too.`
+      )
+  return {
+    to,
+    subject: verdict.eligible
+      ? `Your review check: removable — here's the next step`
+      : `Your review check results — and what we'd look at next`,
+    html: layout(
+      'Your removal assessment',
+      verdictLine +
+        p(
+          `${SITE_NAME} monitors your Google Business Profile, flags every policy-violating review, files the disputes, and follows up with Google until they come down.`
+        ) +
+        p(`<strong>You only pay when a review is actually removed.</strong> No removal, no charge — ever.`) +
+        button(`${SITE_URL}/api/auth/google`, 'Protect my profile')
+    ),
+  }
+}

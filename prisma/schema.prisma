@@ -83,3 +83,32 @@ model ClassificationLog {
   createdAt     DateTime @default(now())
   @@map("classification_logs")
 }
+
+// Public Fake Review Checker (tool-led SEO asset). One row per anonymous
+// check — doubles as IP rate-limit window and conversion analytics.
+model CheckerRun {
+  id            String       @id @default(cuid())
+  ipHash        String
+  reviewText    String
+  rating        Int?
+  violationType String?
+  caseStrength  String
+  confidence    Float
+  eligible      Boolean
+  createdAt     DateTime     @default(now())
+  lead          CheckerLead?
+
+  @@index([ipHash, createdAt])
+  @@map("checker_runs")
+}
+
+model CheckerLead {
+  id        String      @id @default(cuid())
+  email     String
+  runId     String?     @unique
+  run       CheckerRun? @relation(fields: [runId], references: [id])
+  createdAt DateTime    @default(now())
+
+  @@index([email])
+  @@map("checker_leads")
+}
