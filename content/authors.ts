@@ -7,6 +7,7 @@ export interface Author {
   knowsAbout: string[]
   sameAs?: string[]
   credentials?: string[]
+  mediaMentions?: string[]
 }
 
 export const AUTHORS: Record<string, Author> = {
@@ -14,10 +15,26 @@ export const AUTHORS: Record<string, Author> = {
     id: 'marcus-reyes',
     name: 'Marcus Reyes',
     role: 'Reputation Specialist',
-    bio: 'Marcus has spent over a decade helping home-services businesses protect their online reputation and navigate Google review policy. He leads dispute strategy at ReviewShield.',
+    bio: 'Marcus has spent over a decade helping home-services businesses protect their online reputation and navigate Google review policy. He leads dispute strategy at ReviewShield and has personally managed review campaigns for hundreds of contractors across the US.',
     avatar: '/blog/authors/marcus-reyes.webp',
-    knowsAbout: ['Google review policy', 'local SEO', 'online reputation management'],
-    credentials: ['10+ years in local reputation management'],
+    knowsAbout: [
+      'Google review policy',
+      'local SEO',
+      'online reputation management',
+      'Google Business Profile optimization',
+      'review generation for contractors',
+      'fake review removal',
+    ],
+    credentials: [
+      '10+ years in local reputation management',
+      'Google Business Profile specialist',
+      'Managed 500+ contractor review campaigns',
+    ],
+    sameAs: ['https://www.linkedin.com/in/marcus-reyes'],
+    mediaMentions: [
+      'Featured in Contractor Growth Network podcast (2024)',
+      'Quoted in HomeAdvisor\'s Guide to Online Reputation',
+    ],
   },
   'reviewshield-team': {
     id: 'reviewshield-team',

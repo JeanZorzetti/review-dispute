@@ -5,8 +5,8 @@ import { clusterLabel } from '@/src/lib/clusters'
 import { SITE_NAME } from '@/src/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: `Guides on Google review removal, reputation, and local SEO for contractors from ${SITE_NAME}.`,
+  title: 'Google Review & Reputation Management Guides for Contractors | ReviewShield Blog',
+  description: `Guides on getting more Google reviews, removing fake reviews, and managing your contractor reputation — written by ReviewShield specialists.`,
   alternates: { canonical: '/blog' },
 }
 
@@ -14,7 +14,7 @@ export default function BlogIndex() {
   const clusters = getAllClusters()
   return (
     <main className="mx-auto max-w-5xl px-5 py-12 md:px-8">
-      <h1 className="text-3xl font-black uppercase md:text-4xl">The ReviewShield Blog</h1>
+      <h1 className="text-3xl font-black md:text-4xl">The ReviewShield Blog</h1>
       <p className="mt-3 max-w-2xl text-muted">Google review removal, reputation management, and local SEO — written for contractors.</p>
 
       {clusters.length === 0 && <p className="mt-10 text-muted">No articles yet.</p>}

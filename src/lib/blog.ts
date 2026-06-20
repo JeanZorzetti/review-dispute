@@ -24,6 +24,14 @@ export interface PostFrontmatter {
   internalLinks?: string[]
   faqs?: { q: string; a: string }[]
   takeaways?: string[]
+  video?: {
+    title: string
+    description: string
+    thumbnailUrl: string
+    uploadDate: string
+    embedUrl: string
+    duration?: string
+  }
 }
 
 export interface Post extends PostFrontmatter {

@@ -1,0 +1,111 @@
+---
+title: "ReviewShield + Jobber: Automate Review Requests From Your Jobber Workflow"
+description: "Jobber's Connect plan includes built-in review request automation tied to job completion. Here's the setup guide and how ReviewShield protects your Google profile when a fake or policy-violating review appears."
+keywords: ["reviewshield jobber", "jobber google review integration", "jobber review requests", "jobber reputation management", "jobber review automation"]
+datePublished: "2026-06-20"
+author: "marcus-reyes"
+cluster: "integrations"
+pillar: false
+heroAlt: "Jobber dashboard showing client hub review request settings and completed job records"
+internalLinks: ["build-review-generation-system", "automate-review-requests-without-violating-policy", "how-to-remove-fake-google-review", "is-it-against-google-rules-to-ask-for-reviews"]
+faqs:
+  - q: "Which Jobber plan includes review request automation?"
+    a: "Jobber's Connect plan ($149/month) and above include the Client Hub and review request features. The Core plan does not include automated review requests. If you're on Core, you'll need to upgrade to Connect or use a separate review platform."
+  - q: "Does Jobber's review feature gate customers based on satisfaction?"
+    a: "Jobber's review request feature sends review requests universally — it does not include a built-in satisfaction survey that routes customers to different destinations based on their score. This makes it compliant with Google's anti-gating policy by default. Avoid any Jobber add-ons or integrations that add a pre-screening step before directing customers to Google."
+  - q: "Can Jobber automatically send review requests after invoice payment?"
+    a: "Yes — Jobber's automation can trigger review requests on job completion or invoice payment. For most contractors, triggering on invoice payment is the ideal moment: the transaction is complete, the customer has confirmed financial satisfaction by paying, and they're in a positive mindset about the completed work."
+takeaways:
+  - "Jobber Connect ($149/month) includes built-in review request automation — check your plan before buying a separate tool."
+  - "Trigger on invoice payment for best timing: transaction complete, customer in positive mindset."
+  - "Jobber's Client Hub sends requests universally — compliant with Google's no-gating policy by default."
+  - "ReviewShield handles removal of policy-violating reviews; Jobber handles generation."
+---
+
+Jobber is one of the most widely used field-service platforms for small and mid-size contractors — home services, landscaping, cleaning, and trades. If you're on Jobber Connect or above, you have native review request automation available as part of your existing subscription.
+
+This guide covers the Jobber setup, the right trigger timing, compliance considerations, and how ReviewShield fits into a Jobber-based review management workflow.
+
+<KeyTakeaways>
+  <ul>
+    <li>Jobber <strong>Connect plan includes review automation</strong> — no separate platform needed if you're already on Connect.</li>
+    <li>Trigger on <strong>invoice payment</strong> for optimal timing in most trade scenarios.</li>
+    <li>Jobber's review feature is <strong>compliant by default</strong> — it doesn't gate customers by satisfaction score.</li>
+    <li>ReviewShield removes policy-violating reviews; Jobber builds the volume — <strong>complementary, not competing</strong>.</li>
+  </ul>
+</KeyTakeaways>
+
+## Jobber review request setup
+
+**Plan requirement:** Jobber Connect ($149/month) or above. Core plan users need to upgrade or use a third-party platform.
+
+**Step 1: Enable the Client Hub**
+In Jobber, go to Settings → Client Hub. Enable client notifications and review requests.
+
+**Step 2: Configure the review request trigger**
+Jobber allows you to trigger review requests on:
+- Job completion (when the job is marked complete in the field)
+- Invoice payment (when the client pays the invoice)
+
+**Recommended trigger: Invoice payment.** This moment combines several positive signals — the work is done, the client has financially committed to satisfaction by paying, and there's no lingering billing friction. Conversion rates on invoice-payment triggers are typically 15–25% higher than job-completion triggers.
+
+**Step 3: Set the message timing**
+- First request: immediately after trigger or with a 2–4 hour delay (avoid sending at midnight)
+- Follow-up: 3–5 days after first message if no review appears
+
+**Step 4: Configure the message template**
+Jobber's template editor supports merge fields:
+```
+Hi {client_first_name}, thanks for choosing {company_name}!
+
+If you have a minute, we'd love a quick Google review — it really helps
+other homeowners find us: {google_review_url}
+
+Thanks so much — {company_name} team
+```
+
+**Step 5: Test the workflow**
+- Create a test client record
+- Complete a test job and trigger the payment event
+- Confirm the message fires at the right time with the correct link
+
+## Compliance check: is Jobber's review automation Google-compliant?
+
+Jobber's native review request feature sends requests to all invoiced clients — it does not include a satisfaction-score routing step that would constitute gating. This is compliant with Google's review policies by default.
+
+**Watch for:** any Jobber add-on or third-party integration that adds a "How satisfied are you?" pre-step that routes 4-5 star clients to Google while routing 1-3 star clients to a private form. That configuration is gating and violates Google's policy regardless of which platform executes it.
+
+**The compliant Jobber setup:** invoice payment → review request to all clients → Google review link for everyone → no satisfaction filtering.
+
+## Monitoring your review rate in Jobber
+
+Jobber provides reporting on message delivery and open rates through its Client Hub reports. Check monthly:
+
+- Messages sent vs. delivered (delivery failures indicate contact data issues)
+- Open rate by channel (SMS typically 3–4x email open rate)
+- Cross-reference: new Google reviews received ÷ invoices sent = conversion rate
+
+Target conversion rate: 8–15% for most trade categories using Jobber's automation. Below 5% suggests a broken link, poor message timing, or a trigger configuration issue.
+
+## Where ReviewShield fits into your Jobber workflow
+
+Jobber builds your review volume. ReviewShield protects it when policy-violating reviews appear.
+
+**Using Jobber to verify review legitimacy:**
+
+When a suspicious review appears on your Google profile, Jobber's client records are your verification tool:
+
+1. Search Jobber for the reviewer's name and phone number
+2. Check job history for their address against the review content
+3. If no match exists in your Jobber records, the reviewer may not be a customer — document this
+
+This Jobber-sourced verification is part of the evidence file for a ReviewShield case. A screenshot of your Jobber records showing no matching customer for the review date and description strengthens the removal case significantly.
+
+**When to initiate a ReviewShield case:**
+- One-star review from a name with no matching Jobber record
+- Multiple reviews appear in a short window from accounts with no review history
+- Review content doesn't match any job in your Jobber records by date, location, or service type
+
+<CTA />
+
+Jobber and ReviewShield address different parts of the review lifecycle. Jobber's automation earns you the reviews your completed jobs deserve. ReviewShield removes the reviews that shouldn't be there. Together, they give you a complete review management workflow without the overhead of a dedicated reputation management platform.

@@ -86,3 +86,23 @@ export function faqPageSchema(faqs: { q: string; a: string }[]) {
     })),
   }
 }
+
+export function videoSchema(v: {
+  title: string
+  description: string
+  thumbnailUrl: string
+  uploadDate: string
+  embedUrl: string
+  duration?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: v.title,
+    description: v.description,
+    thumbnailUrl: v.thumbnailUrl,
+    uploadDate: v.uploadDate,
+    embedUrl: v.embedUrl,
+    ...(v.duration ? { duration: v.duration } : {}),
+  }
+}

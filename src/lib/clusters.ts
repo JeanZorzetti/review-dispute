@@ -5,6 +5,9 @@ export const CLUSTER_LABELS: Record<string, string> = {
   'responding-reviews': 'Responding to Reviews',
   'by-vertical': 'By Trade',
   'getting-reviews': 'Getting More Reviews',
+  'ai-tools': 'AI Review Tools',
+  'integrations': 'Integrations',
+  'case-studies': 'Case Studies',
 }
 
 export function clusterLabel(slug: string): string {

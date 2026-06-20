@@ -1,0 +1,140 @@
+---
+title: "ReviewShield + ServiceTitan: Protect Your Google Reviews From Your CRM"
+description: "ServiceTitan contractors using Marketing Pro can trigger review requests directly from completed jobs. Here's how to set up the workflow and what ReviewShield adds when a review needs to come down."
+keywords: ["reviewshield servicetitan", "servicetitan google review integration", "servicetitan review requests", "servicetitan reputation management", "servicetitan review workflow"]
+datePublished: "2026-06-20"
+author: "marcus-reyes"
+cluster: "integrations"
+pillar: false
+heroAlt: "ServiceTitan dashboard showing completed job record with review request automation configured"
+internalLinks: ["build-review-generation-system", "automate-review-requests-without-violating-policy", "how-to-remove-fake-google-review", "is-it-against-google-rules-to-ask-for-reviews"]
+faqs:
+  - q: "Does ServiceTitan have a built-in review request feature?"
+    a: "Yes — ServiceTitan Marketing Pro includes an automated review request feature that triggers from completed job records. You configure the message template, set the trigger condition (job status = complete), and the platform handles the send timing and follow-up. This eliminates the need for a separate review platform for contractors already on ServiceTitan Marketing Pro."
+  - q: "What does ReviewShield add if I'm already using ServiceTitan for review requests?"
+    a: "ServiceTitan generates review requests and helps you earn more reviews. ReviewShield handles the other side: when a review on your profile violates Google's policy — fake from a non-customer, competitor attack, off-topic rant — ReviewShield identifies the exact violation, builds the evidence documentation, and pursues removal on your behalf. These are complementary: ServiceTitan builds your review volume; ReviewShield protects it."
+  - q: "Can I use Zapier to connect ServiceTitan to ReviewShield?"
+    a: "ReviewShield doesn't have a Zapier integration for automated case submission — removal cases require human review to identify the right policy violation and build the evidence file. You can use Zapier to connect ServiceTitan to your review monitoring tool to receive alerts when new reviews post, then initiate a ReviewShield case manually when a policy-violating review appears."
+takeaways:
+  - "ServiceTitan Marketing Pro includes built-in review request automation triggered from completed job records."
+  - "The setup requires configuring trigger conditions, message templates, and follow-up timing in the Marketing Pro automation builder."
+  - "ReviewShield handles removal when a review violates Google's policy — ServiceTitan handles the generation side."
+  - "The two systems are complementary: build volume with ServiceTitan's automation; protect it with ReviewShield."
+---
+
+ServiceTitan is the dominant field-service CRM for HVAC, plumbing, and electrical companies. If you're already running ServiceTitan with Marketing Pro, you may have review request automation available without paying for a separate platform — most contractors with Marketing Pro don't realize this capability is included.
+
+This guide walks through setting up ServiceTitan's review request automation, explains the coverage it provides, and shows where ReviewShield fits into the picture for contractors who need to handle policy-violating reviews.
+
+<KeyTakeaways>
+  <ul>
+    <li>ServiceTitan <strong>Marketing Pro includes review automation</strong> — check your plan before buying a separate tool.</li>
+    <li>The trigger is a <strong>completed job status</strong> — configure it in Marketing Pro's automation builder.</li>
+    <li>ReviewShield handles <strong>removal</strong> when reviews violate Google's policy — a different function from generation.</li>
+    <li>Together, the two systems cover <strong>the full review lifecycle</strong>: earn, protect, remove when needed.</li>
+  </ul>
+</KeyTakeaways>
+
+## What ServiceTitan Marketing Pro includes for review requests
+
+ServiceTitan Marketing Pro's "After-Job Communication" feature allows you to configure automated messages that fire when a job reaches a specific status — typically "Complete" or "Closed." This is the core review request trigger.
+
+**What's included:**
+- Automated SMS and email review requests from completed jobs
+- Template builder for message content (personalized with customer name, job type)
+- Follow-up sequences if the first message doesn't convert
+- Google Business Profile integration for review link delivery
+- Reporting on message open rates and review response
+
+**What requires Marketing Pro:**
+This is an add-on to ServiceTitan's base platform, typically adding ~$200–$350/month. If you're on ServiceTitan but not Marketing Pro, you'll need either the Marketing Pro upgrade or a separate review platform.
+
+## Setting up the review request automation in ServiceTitan
+
+**Step 1: Access Marketing Pro automation**
+In your ServiceTitan dashboard, navigate to Marketing → Automations → New Automation.
+
+**Step 2: Configure the trigger**
+- Trigger type: Job status change
+- Status: "Complete" (or whatever job-complete status your operation uses)
+- Filter: You can filter by job type, business unit, or technician if you want to narrow the scope
+
+**Step 3: Set the delay**
+- First message: 24 hours after job completion (gives the homeowner time to settle before the ask)
+- Second follow-up: 4–5 days after first message if no review posted
+
+**Step 4: Write the message template**
+Use ServiceTitan's merge fields to personalize:
+```
+Hi {{customer.first_name}}, this is {{technician.name}} from {{company.name}}.
+Thank you for choosing us for your {{job.job_type}} today.
+If you have 30 seconds, a Google review would mean a lot: {{google_review_link}}
+Thanks either way!
+```
+
+**Step 5: Configure compliance settings**
+- Do NOT enable satisfaction-score routing (this creates gating — a Google policy violation)
+- Set the sequence to send to ALL completed-job customers, not filtered by survey score
+- Verify the review link resolves correctly on both iOS and Android before activating
+
+**Step 6: Test**
+Create a test job, complete it, and verify the automation fires correctly. Check that:
+- The text arrives within the configured delay window
+- The review link opens the correct Google review form
+- The follow-up fires at the right interval
+
+## Monitoring your review pipeline in ServiceTitan
+
+ServiceTitan Marketing Pro provides reporting on:
+- Messages sent vs. delivered
+- Open rates by channel (SMS vs. email)
+- Review conversion rate by job type or business unit
+
+Use these reports monthly to check system health. A sudden drop in conversion rate (reviews per completed job) signals either a broken automation, a link issue, or a change in job volume. Investigate before it compounds.
+
+## Where ReviewShield fits
+
+ServiceTitan Marketing Pro handles the generation side of your review strategy — sending requests, following up, and tracking conversion. ReviewShield handles the protection side: identifying and removing reviews that violate Google's content policy.
+
+**When to open a ReviewShield case:**
+
+1. A one-star review appears from a name not in your ServiceTitan job records
+2. Multiple negative reviews appear within a short window from accounts with no review history
+3. A review contains language that violates Google's policies (threats, off-topic content, competitor impersonation)
+4. Your ServiceTitan job history confirms the reviewer never received service from you
+
+**The process:**
+1. Screenshot the review immediately
+2. Cross-reference against ServiceTitan customer records (customer name, address, phone)
+3. If no match is found, initiate a ReviewShield case with the review URL, screenshot, and ServiceTitan confirmation of no matching customer
+4. ReviewShield builds the evidence file and submits to Google
+
+ReviewShield charges **$499 per removed review, pay-on-removal** — if the review doesn't come down, you owe nothing.
+
+## The full workflow: ServiceTitan + ReviewShield
+
+```
+Job completed in ServiceTitan
+        │
+        ▼
+Marketing Pro automation fires (24hr delay)
+        │
+        ├─── Customer leaves review → ✅ New review on profile
+        │
+        ▼ (day 4–5 if no review)
+Follow-up message fires
+        │
+        ├─── Customer leaves review → ✅ New review on profile
+        │
+        └─── No response → sequence ends
+
+Ongoing monitoring:
+        │
+        ├─── New review appears → Respond within 24hrs
+        │
+        └─── Policy-violating review appears → Open ReviewShield case
+```
+
+<CTA />
+
+ServiceTitan's automation builds your review volume systematically. ReviewShield ensures the reviews that violate Google's policy don't stay on your profile. Together, they cover the full lifecycle of contractor reputation management at the platform level you're already working in.

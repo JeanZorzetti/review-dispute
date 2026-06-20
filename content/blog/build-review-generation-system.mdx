@@ -152,6 +152,74 @@ The specifics of timing — same day vs. next morning, what changes for a big jo
 
 If you're running a solo operation or a small crew, the manual approach with a dedicated end-of-day routine works fine and costs nothing. The paid tools earn their price as volume grows and manual follow-up becomes unreliable. Start with free, automate when the system is breaking because you can't keep up.
 
+## Field-service CRM integrations: triggering requests from software you already use
+
+<AnswerBox>
+If you're already running ServiceTitan, Jobber, Housecall Pro, or CompanyCam, you may not need a separate review-request platform at all. Each of these tools has a native or integration-based path to trigger a review request when a job closes — meaning the automation you need is often already in your stack, just not configured.
+</AnswerBox>
+
+Most contractors who invest in a $75/month review-request platform don't realize their existing field-service software can do the same job at zero marginal cost. Here's how each major platform handles it:
+
+| Platform | Native review request | Integration path | Setup notes |
+|---|---|---|---|
+| **ServiceTitan** | Yes — "After-Job Communication" in Marketing Pro tier | Native; triggers on job completion | Requires Marketing Pro add-on (~$200/mo); configure template under Automations |
+| **Jobber** | Yes — "Client Hub" can request reviews; automated with "Connect" plan | Native | Upgrade to Connect ($149/mo); enable review requests under Client Notifications |
+| **Housecall Pro** | Yes — native review request on "Grow" plan | Native | Enable under Settings → Reviews; auto-sends after invoice is paid |
+| **CompanyCam** | No native review send | Via Zapier → SMS tool | CompanyCam triggers Zap on project completion; Zap sends review link via Twilio or similar |
+| **Manual / No CRM** | — | Build in your SMS app | Save a review-link template in your phone; send within 24 hours of job close |
+
+**Configuration checklist for CRM integrations:**
+- [ ] Confirm your plan tier includes automation or communication features
+- [ ] Set trigger to "job complete" or "invoice paid" — not "job created"
+- [ ] Load the review link into the message template (test that it resolves correctly)
+- [ ] Set follow-up delay to 24 hours, second follow-up to day 4–5
+- [ ] Test the entire flow on a real job before going live
+
+The core advantage of triggering from your CRM: the customer's name, job type, and address are already in the system, making it trivial to personalize the message — which lifts open rates and conversion.
+
+## Automation sequence: what happens on every job
+
+The full review generation sequence looks like this from start to finish:
+
+```
+Job marked complete in CRM
+       │
+       ▼ (immediate)
+Automated text #1 fires
+  "Hi [Name], this is [Tech] from [Company].
+   Thanks for today — a Google review helps us a lot:
+   [short link]. Takes 30 sec. Thanks!"
+       │
+       ├─── Customer taps link → leaves review → done
+       │
+       ▼ (day 4–5, if no review detected)
+Automated text #2 fires
+  "Hi [Name] — just following up on the review
+   request from [day]. No pressure, we just
+   appreciate the support: [short link]"
+       │
+       ├─── Customer taps link → leaves review → done
+       │
+       └─── No response → sequence ends (do not send more)
+```
+
+**Contractor-specific benchmark targets by trade:**
+
+| Trade | Expected conversion rate | Target monthly reviews at 50 jobs/mo |
+|---|---|---|
+| Roofer (replacement) | 12–18% | 6–9 |
+| HVAC (service calls) | 8–14% | 4–7 |
+| Plumber (emergency) | 6–12% | 3–6 |
+| Electrician | 10–16% | 5–8 |
+| General contractor | 5–10% | 2–5 |
+
+Emergency or same-day jobs convert at the lower end (customer stress is high, emotional connection to the review is lower). Larger planned jobs — roof replacements, HVAC installs — convert at the higher end because the customer has more time to invest emotionally in the outcome.
+
+**What a broken sequence looks like:**
+- Conversion rate below 3%: the link is wrong, the automation isn't firing, or the in-person ask is being skipped entirely
+- Conversion rate 3–7%: follow-up sequence likely not configured, or timing is off (requesting too late)
+- Sudden drop from baseline: check platform logs for paused automations, billing issues, or CRM disconnections
+
 <StatGrid>
   <Stat value="98%" label="SMS open rate vs. ~20% for email — text is the right channel for review requests" source="Gartner SMS Marketing Research" />
   <Stat value="10-20%" label="Healthy review conversion rate — reviews earned per completed job with a working system" source="ReviewShield contractor benchmarks" />

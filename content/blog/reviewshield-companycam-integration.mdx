@@ -1,0 +1,124 @@
+---
+title: "ReviewShield + CompanyCam: From Job Photos to Google Reviews"
+description: "CompanyCam doesn't have native review request features, but project completion events can trigger review requests via Zapier. Here's how to build the workflow and how ReviewShield protects your review profile."
+keywords: ["reviewshield companycam", "companycam google review integration", "companycam review requests", "companycam zapier review workflow", "companycam contractor reviews"]
+datePublished: "2026-06-20"
+author: "marcus-reyes"
+cluster: "integrations"
+pillar: false
+heroAlt: "Contractor using CompanyCam to photograph completed roofing project before triggering a review request workflow"
+internalLinks: ["build-review-generation-system", "automate-review-requests-without-violating-policy", "how-to-remove-fake-google-review", "google-reviews-for-roofers"]
+faqs:
+  - q: "Does CompanyCam have built-in Google review request features?"
+    a: "No — CompanyCam is a job-site photo and documentation platform, not a review management tool. It doesn't natively send review requests. However, CompanyCam project completion events can trigger a Zapier workflow that sends a review request via SMS platform like Twilio or through an integrated review tool."
+  - q: "Why would a contractor use CompanyCam for review generation?"
+    a: "CompanyCam is often the 'last touch' before a job is considered complete — especially for roofers and contractors who document finished work with photos. Building a review request trigger off a CompanyCam project-complete event ties the request to the actual completion of documentation, not just a job status in a CRM that may be updated prematurely."
+  - q: "What does the CompanyCam + Zapier + Twilio workflow cost?"
+    a: "CompanyCam plans start at $19/user/month. Zapier's paid plan (needed for multi-step Zaps) runs $20–$50/month. Twilio SMS costs roughly $0.0079 per message, so 200 messages/month costs under $2 in SMS fees. Total workflow cost: $40–$75/month depending on team size and message volume."
+takeaways:
+  - "CompanyCam doesn't have native review features — use Zapier to trigger requests from project completion."
+  - "The workflow: CompanyCam project marked complete → Zapier trigger → SMS via Twilio with Google review link."
+  - "This workflow is particularly valuable for roofers who use CompanyCam as the final quality gate before a project is closed."
+  - "ReviewShield handles removal when a policy-violating review appears — use CompanyCam project records to verify review legitimacy."
+---
+
+CompanyCam is the go-to photo documentation tool for roofing contractors and general contractors — used to capture before/after shots, safety documentation, and final project photos. It's not a CRM and doesn't have native review features, but its project completion events are a natural trigger point for a review request workflow.
+
+This guide explains how to build a review request automation using CompanyCam, Zapier, and an SMS platform, why CompanyCam's completion event is a particularly strong trigger for roofers, and how ReviewShield fits into the picture.
+
+<KeyTakeaways>
+  <ul>
+    <li>CompanyCam has <strong>no native review features</strong> — requires Zapier integration with an SMS platform.</li>
+    <li>For roofers, CompanyCam project completion is the <strong>ideal trigger</strong> — it confirms documentation is done, not just job status.</li>
+    <li>Setup cost: <strong>~$40–$75/month</strong> (Zapier + Twilio); minimal compared to dedicated review platforms.</li>
+    <li>Use CompanyCam <strong>project photos and records</strong> to verify review legitimacy when a suspicious review appears.</li>
+  </ul>
+</KeyTakeaways>
+
+## Why CompanyCam project completion is a strong review trigger
+
+Most CRM-based review request triggers fire when a job status changes — which can happen prematurely (a tech marks "complete" before the final walkthrough) or with significant variance across job types. CompanyCam's project-complete event is different: it fires when documentation is finalized, which for roofing contractors specifically means:
+
+- Before/after photos are uploaded
+- Final quality inspection images are captured
+- The customer photo set is ready to share
+
+This is closer to actual completion than a job status update and closer to the moment of peak homeowner satisfaction than an invoice event. For roofers especially, building the review request off CompanyCam completion rather than CRM status creates a tighter relationship between "job is demonstrably done" and "ask the homeowner for a review."
+
+## Building the CompanyCam → Zapier → Twilio workflow
+
+**What you need:**
+- CompanyCam (any paid plan)
+- Zapier paid plan (needed for multi-step Zaps, $20–$50/month)
+- Twilio account (SMS platform, pay-per-message — very low cost)
+- Your Google review link (short URL from your GBP dashboard)
+
+**Step 1: Create a Zapier account and connect CompanyCam**
+
+In Zapier, search for CompanyCam as an app. Authenticate with your CompanyCam credentials. Test the connection.
+
+**Step 2: Set the trigger**
+
+Trigger: CompanyCam → "Project Status Updated"
+Filter: Status = "Complete" (or the equivalent in your CompanyCam workflow)
+
+**Step 3: Add a delay step**
+
+Add a Zapier "Delay" step: 24 hours. This ensures the review request doesn't fire immediately at project close, giving the homeowner time to settle before receiving the ask.
+
+**Step 4: Add the SMS send action**
+
+Action: Twilio → "Send SMS Message"
+To: {{project.customer_phone}} (pulled from CompanyCam project record — ensure phone numbers are captured in your projects)
+From: Your Twilio number
+Body:
+```
+Hi {{project.customer_name}}, thanks for letting us document the work at your place today.
+If we did right by you, a quick Google review helps us a ton: [YOUR_SHORT_REVIEW_LINK]
+— [Your Name], [Company Name]
+```
+
+**Step 5: Optional — add a follow-up Zap**
+
+If you want a follow-up message after 4–5 days, create a second Zap that triggers from the same CompanyCam event, with a 5-day delay, and sends a follow-up SMS.
+
+**Step 6: Test the full workflow**
+
+Update a real (or test) project to "Complete" in CompanyCam and watch the Zap fire. Verify the SMS arrives with the correct link and personalization.
+
+## What to capture in CompanyCam for review verification
+
+CompanyCam is also a valuable evidence tool when you need to challenge a suspicious review. For every project, ensure you're capturing:
+
+- **Before and after photos** with timestamps
+- **Final walkthrough photos** showing completed work
+- **Customer sign-off** (if you use CompanyCam's digital forms feature)
+- **Project address** matching the job
+
+When a suspicious review appears, CompanyCam's timestamped project records can confirm when work was completed at a specific address — which is evidence that a review claiming otherwise is inaccurate.
+
+## Alternative: CompanyCam → Zapier → Review Platform
+
+If you use a dedicated review platform (NiceJob, Podium, Birdeye) in addition to CompanyCam, you can use Zapier to trigger a review request through that platform instead of directly via Twilio. The workflow:
+
+CompanyCam project complete → Zapier → [Review Platform] → review request fires using the platform's native sequence
+
+This approach uses the platform's follow-up logic and reporting rather than building it manually in Zapier, but requires both tools to be paid.
+
+## Where ReviewShield fits
+
+CompanyCam's workflow generates review requests. ReviewShield handles protection when a policy-violating review appears.
+
+**Using CompanyCam records for a ReviewShield case:**
+1. Suspicious review appears — reviewer name not in CompanyCam project records
+2. Screenshot the review
+3. Export CompanyCam project list for the relevant date range showing no matching project
+4. Submit to ReviewShield: review URL, screenshot, CompanyCam records showing no matching customer
+
+CompanyCam's timestamped photo documentation is particularly strong evidence for roofing and GC cases where the reviewer claims work was done "incorrectly" — you have photographic proof of what was actually completed.
+
+ReviewShield charges **$499 per removed review, pay-on-removal.**
+
+<CTA />
+
+CompanyCam's project completion event is a natural, high-quality trigger for review requests — especially for roofers who treat final photo documentation as the true end of a project. The Zapier + Twilio workflow adds this trigger at low cost without requiring a separate review platform. And when a review doesn't reflect reality, CompanyCam's timestamped records become your evidence file.

@@ -7,7 +7,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { getAllPosts, getPostBySlug, getRelated } from '@/src/lib/blog'
 import { mdxComponents } from '@/src/lib/mdx-components'
 import { JsonLd } from '@/src/components/seo/JsonLd'
-import { blogPostingSchema, faqPageSchema, breadcrumbSchema } from '@/src/lib/schema'
+import { blogPostingSchema, faqPageSchema, breadcrumbSchema, videoSchema } from '@/src/lib/schema'
 import { clusterLabel } from '@/src/lib/clusters'
 import { SITE_URL } from '@/src/lib/site'
 import { getAuthor } from '@/content/authors'
@@ -64,6 +64,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       { name: post.title, url: `/blog/${post.slug}` },
     ]),
     ...(post.faqs && post.faqs.length ? [faqPageSchema(post.faqs)] : []),
+    ...(post.video ? [videoSchema(post.video)] : []),
   ]
 
   return (
@@ -77,11 +78,25 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </nav>
 
       <header className="mt-4">
-        <h1 className="text-3xl font-black uppercase leading-tight md:text-4xl">{post.title}</h1>
+        <h1 className="text-3xl font-black leading-tight md:text-4xl">{post.title}</h1>
         <div className="mt-3 text-sm text-muted">
           <Link href={`/blog/author/${author.id}`} className="hover:text-accent">{author.name}</Link>, {author.role} · {new Date(post.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · {post.readingMinutes} min read
         </div>
       </header>
+
+      {post.video && (
+        <div className="mt-8 overflow-hidden rounded-lg border border-line">
+          <div className="relative aspect-video w-full">
+            <iframe
+              src={post.video.embedUrl}
+              title={post.video.title}
+              className="absolute inset-0 h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
 
       {post.takeaways && post.takeaways.length > 0 && (
         <div className="mt-8 rounded-lg border border-line bg-surface p-5">
@@ -102,7 +117,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       {post.faqs && post.faqs.length > 0 && (
         <section className="mt-12">
-          <h2 className="text-2xl font-extrabold uppercase">FAQ</h2>
+          <h2 className="text-2xl font-extrabold">FAQ</h2>
           <div className="mt-4 space-y-4">
             {post.faqs.map((f, i) => (
               <div key={i} className="rounded-lg border border-line bg-surface p-4">
