@@ -68,14 +68,16 @@ Add a Zapier "Delay" step: 24 hours. This ensures the review request doesn't fir
 
 **Step 4: Add the SMS send action**
 
-Action: Twilio → "Send SMS Message"
-To: {{project.customer_phone}} (pulled from CompanyCam project record — ensure phone numbers are captured in your projects)
-From: Your Twilio number
-Body:
+Configure the Twilio action in Zapier with the following settings (use CompanyCam merge fields for personalization — confirm your projects capture customer phone numbers):
+
 ```
-Hi {{project.customer_name}}, thanks for letting us document the work at your place today.
-If we did right by you, a quick Google review helps us a ton: [YOUR_SHORT_REVIEW_LINK]
-— [Your Name], [Company Name]
+Action:  Twilio → "Send SMS Message"
+To:      [project.customer_phone]
+From:    Your Twilio number
+Body:    Hi [project.customer_name], thanks for letting us document the
+         work at your place today. If we did right by you, a quick Google
+         review helps us a ton: [YOUR_SHORT_REVIEW_LINK]
+         — [Your Name], [Company Name]
 ```
 
 **Step 5: Optional — add a follow-up Zap**
