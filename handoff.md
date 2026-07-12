@@ -2,6 +2,19 @@
 
 Última atualização: 2026-07-12
 
+## Feito (12/07 — "Publicar 1 artigo novo no blog", agenda do Hub)
+
+- **Post novo** (`0690bd5`): `/blog/how-to-spot-a-fake-google-review` — 9 red flags + 4 falsos positivos.
+  Preenche o buraco de **detecção** ("esse review é falso?"); os 75 posts anteriores só cobriam
+  política e remoção. É o topo-de-funil natural do checker. Verificado 200 em prod.
+- **Raiz da revisão de kill-gates 11/07 corrigida**: **0 dos 75 posts linkavam pro `/fake-review-checker`**
+  — o `<CTA/>` renderizado em todos eles apontava pro `/api/auth/google` (OAuth, quebrado em prod por
+  falta de `GOOGLE_CLIENT_ID`). Trocado por link pro checker → **76 posts agora linkam pro tool** (verificado
+  em prod num post antigo). Era a ação nº1 da tese tool-led antes do gate D+90 (02/09).
+- Gate: 109 testes + tsc limpos; script ad-hoc validou frontmatter (80–165 chars), links internos e compilação MDX dos 76 posts.
+- **Pendente do gate:** reforçar on-page do checker pra query exata "fake google review checker" (hoje p78);
+  marcar a tarefa como feita no `hub.roilabs.com.br/agenda` (API exige auth, não dá pra fazer daqui).
+
 ## Feito (12/07 — "Confirmar deploy em produção")
 
 - **Deploy em prod CONFIRMADO**: `reviewshield.nimblabs.com` no ar rodando o código da main.
