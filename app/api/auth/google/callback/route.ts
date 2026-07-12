@@ -6,6 +6,7 @@ import { exchangeCode, fetchUserInfo, saveClientTokens, OAUTH_STATE_COOKIE } fro
 import { setClientSessionCookie } from '@/src/lib/client-auth'
 import { sendEmail } from '@/src/lib/email'
 import { welcomeEmail } from '@/src/lib/email-templates'
+import { SITE_URL } from '@/src/lib/site'
 
 function safeEqual(a: string, b: string): boolean {
   const ba = Buffer.from(a)
@@ -45,8 +46,8 @@ export async function GET(request: Request) {
     if (isNew) await sendEmail(welcomeEmail(email, client.businessName))
   } catch (e) {
     console.error('[oauth] callback failed:', e)
-    return NextResponse.redirect(new URL('/?error=google_connect_failed', request.url))
+    return NextResponse.redirect(new URL('/?error=google_connect_failed', SITE_URL))
   }
 
-  return NextResponse.redirect(new URL(`/onboarding/billing?clientId=${clientId}`, request.url))
+  return NextResponse.redirect(new URL(`/onboarding/billing?clientId=${clientId}`, SITE_URL))
 }
