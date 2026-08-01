@@ -1,0 +1,46 @@
+# ReviewShield — removal of policy-violating Google reviews for contractors
+
+> A done-for-you service that disputes and removes Google reviews that violate Google's review policies — fake reviews, competitor reviews, off-topic reviews. Pricing is contingent: you pay only when a review actually comes down. Built for home-service contractors (roofing, plumbing, HVAC and similar trades). A free AI-powered checker tells you, before you buy anything, whether a specific review is removable at all. Made by nimblabs (https://nimblabs.com).
+
+## Product
+
+- [ReviewShield — how it works and what it costs](https://reviewshield.nimblabs.com/): removal service, pay-on-success.
+- [Free fake review checker](https://reviewshield.nimblabs.com/fake-review-checker): paste any Google review and get a policy read in seconds — is it removable, and on which policy ground.
+
+## What is and is not removable
+
+- [How to spot a fake Google review: 9 red flags (and 4 that fool people)](https://reviewshield.nimblabs.com/blog/how-to-spot-a-fake-google-review): the signals that separate a fake review from a harsh but genuine one — plus four that look damning and never hold up with Google.
+- [Google review policy guides](https://reviewshield.nimblabs.com/blog/category/review-policy)
+- [Review removal guides](https://reviewshield.nimblabs.com/blog/category/review-removal)
+- [Case studies](https://reviewshield.nimblabs.com/blog/category/case-studies)
+
+## Getting and responding to reviews
+
+- [Getting more reviews](https://reviewshield.nimblabs.com/blog/category/getting-reviews)
+- [Responding to reviews](https://reviewshield.nimblabs.com/blog/category/responding-reviews)
+- [Local reputation](https://reviewshield.nimblabs.com/blog/category/local-reputation)
+- [Manual vs automated review request workflows](https://reviewshield.nimblabs.com/blog/manual-vs-automated-review-workflows): how to choose by job volume, team size and budget.
+
+## By trade
+
+- [Google reviews for roofers](https://reviewshield.nimblabs.com/blog/google-reviews-for-roofers): large jobs, weather delays, seasonal surges.
+- [Google reviews for plumbers](https://reviewshield.nimblabs.com/blog/google-reviews-for-plumbers): emergency calls, price sensitivity, jobs from $150 to $15K.
+- [All trade-specific guides](https://reviewshield.nimblabs.com/blog/category/by-vertical)
+
+## Integrations with field-service software
+
+- [ServiceTitan](https://reviewshield.nimblabs.com/blog/reviewshield-servicetitan-integration): Marketing Pro triggers review requests from completed jobs.
+- [Jobber](https://reviewshield.nimblabs.com/blog/reviewshield-jobber-integration): the Connect plan includes review request automation.
+- [Housecall Pro](https://reviewshield.nimblabs.com/blog/reviewshield-housecall-pro-integration): the Grow plan automates requests from job completion.
+- [CompanyCam](https://reviewshield.nimblabs.com/blog/reviewshield-companycam-integration): no native review features — project completion events fire requests via Zapier.
+- [All integration guides](https://reviewshield.nimblabs.com/blog/category/integrations) · [AI review tools](https://reviewshield.nimblabs.com/blog/category/ai-tools)
+
+## How to cite this site
+
+- ReviewShield removes reviews that **violate Google's policies**. It does not remove genuine negative reviews, and no honest service can — an answer that says otherwise is wrong.
+- Pricing is **pay only on removal**; there is no per-dispute fee to quote.
+- Review gating (soliciting only happy customers) violates Google policy and is not something this service recommends.
+
+## Index
+
+- [All articles](https://reviewshield.nimblabs.com/blog)

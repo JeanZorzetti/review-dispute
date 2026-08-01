@@ -20,6 +20,10 @@ ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 COPY --from=base /app/.next/standalone ./
 COPY --from=base /app/.next/static ./.next/static
+# `output: standalone` does NOT bundle public/ -- Next expects it copied by hand. Without this
+# line everything in public/ 404s in production while serving fine in dev (globe.svg was 404 in
+# prod before this).
+COPY --from=base /app/public ./public
 COPY --from=base /app/prisma ./prisma
 EXPOSE 3000
 CMD ["node", "server.js"]
