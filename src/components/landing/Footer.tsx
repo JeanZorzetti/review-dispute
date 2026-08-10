@@ -16,6 +16,8 @@ export function Footer() {
         <nav className="flex gap-6 text-xs text-muted">
           <a href="/blog" className="hover:text-white transition-colors">Blog</a>
           <a href={CONNECT_URL} className="hover:text-white transition-colors">Get Started</a>
+          <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+          <a href="/terms" className="hover:text-white transition-colors">Terms</a>
         </nav>
         <p className="text-xs text-muted">© {new Date().getFullYear()} {PRODUCT_NAME}. All rights reserved.</p>
       </div>
