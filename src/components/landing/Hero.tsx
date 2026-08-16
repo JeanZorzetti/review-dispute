@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { CONNECT_URL, HERO } from './site-config'
 
 export function Hero() {
@@ -34,6 +35,15 @@ export function Hero() {
         >
           {HERO.cta}
         </a>
+        {/* ponytail: the home page's only link to the tool was the nav. Body link from the
+            strongest page on the site, with the query in the anchor. */}
+        <p className="mt-5 text-sm text-muted">
+          Not ready to connect? Run our{' '}
+          <Link href="/fake-review-checker" className="font-bold text-accent underline underline-offset-4 hover:text-white">
+            free fake Google review checker
+          </Link>{' '}
+          — paste a review, see if it&apos;s removable in seconds.
+        </p>
       </motion.div>
     </section>
   )

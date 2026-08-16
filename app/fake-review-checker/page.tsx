@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import { getPostBySlug } from '@/src/lib/blog'
 import { Header } from '@/src/components/landing/Header'
 import { Footer } from '@/src/components/landing/Footer'
 import { CheckerForm } from '@/src/components/checker/CheckerForm'
@@ -68,7 +70,22 @@ const appJsonLd = {
   publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
 }
 
+// ponytail: the checker was a dead end — nothing linked out of it, so it sat outside the blog's
+// topic cluster. Slugs resolved through getPostBySlug so a renamed post drops out instead of 404ing.
+const READING = [
+  ['how-to-spot-a-fake-google-review', 'The 9 red flags that mark a review as fake'],
+  ['5-types-of-reviews-google-removes', 'The 5 review types Google actually removes'],
+  ['how-to-remove-fake-google-review', 'How to remove a fake Google review, step by step'],
+  ['how-to-tell-if-google-review-violates-policy', 'How to tell if a review violates Google policy'],
+  ['how-to-flag-a-google-review', 'How to flag a Google review: the exact steps'],
+  ['remove-competitor-fake-review', 'When the fake review came from a competitor'],
+] as const
+
 export default function FakeReviewCheckerPage() {
+  const reading = READING.map(([slug, label]) => ({ slug, label, post: getPostBySlug(slug) })).filter(
+    (r) => r.post !== null
+  )
+
   return (
     <main className="min-h-screen bg-bg text-white">
       <script
@@ -178,6 +195,32 @@ export default function FakeReviewCheckerPage() {
               </details>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Related reading — outbound internal links into the review-removal cluster */}
+      <section className="py-16">
+        <div className="mx-auto max-w-3xl px-5">
+          <h2 className="text-center text-2xl font-black uppercase tracking-tight md:text-3xl">
+            Before you report the review
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-muted md:text-base">
+            The checker tells you <em>whether</em> a review is removable. These guides cover what to
+            do next — spotting fakes by hand, matching the violation, and filing a report Google
+            acts on.
+          </p>
+          <ul className="mt-8 divide-y divide-line border-y border-line">
+            {reading.map((r) => (
+              <li key={r.slug}>
+                <Link
+                  href={`/blog/${r.slug}`}
+                  className="block py-4 text-sm font-bold text-muted transition-colors hover:text-white"
+                >
+                  {r.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

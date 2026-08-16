@@ -6,7 +6,8 @@ export function CTA({ headline = 'Got a fake review killing your jobs?', sub = '
     <div className="not-prose my-10 rounded-xl border border-line bg-surface p-6 text-center">
       <p className="text-lg font-black uppercase text-white">{headline}</p>
       <p className="mt-2 text-sm text-muted">{sub}</p>
-      <Link href="/fake-review-checker" className="mt-4 inline-block rounded-md bg-accent px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-white transition-transform hover:scale-105">Check a review free</Link>
+      {/* ponytail: anchor carries the query. "Check a review free" was 76 boilerplate links with zero keyword in them. */}
+      <Link href="/fake-review-checker" className="mt-4 inline-block rounded-md bg-accent px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-white transition-transform hover:scale-105">Free Fake Google Review Checker</Link>
     </div>
   )
 }
