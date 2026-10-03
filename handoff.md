@@ -2,7 +2,7 @@
 
 Última atualização: 2026-10-03
 
-## Diagnóstico 03/10 (/desire-positioning, modo continuar ou parar): veredito candidato PARAR
+## Diagnóstico 03/10 (/desire-positioning, modo continuar ou parar): PARAR (ratificado pelo Jean em 03/10; fora do roihub e do autopublish em `f4a94ab`)
 
 Mapa completo: `ROI Labs/reviewshield-mapa-de-desejo-2026-10-03.md` (fora do repo).
 
