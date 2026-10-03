@@ -1,6 +1,21 @@
 # Handoff — ReviewShield (review-dispute-agent)
 
-Última atualização: 2026-07-12
+Última atualização: 2026-10-03
+
+## Diagnóstico 03/10 (/desire-positioning, modo continuar ou parar): veredito candidato PARAR
+
+Mapa completo: `ROI Labs/reviewshield-mapa-de-desejo-2026-10-03.md` (fora do repo).
+
+- **Fora do ar desde ~23/09:** `reviewshield.nimblabs.com` dá NXDOMAIN na zona Cloudflare de
+  `nimblabs.com` (o `aftercare.` também). O host do EasyPanel dá 404 e o Postgres `:5441` dá timeout
+  (outras portas da mesma VPS abrem). A queda coincide com a migração do `nimblabs.com` para a Vercel.
+- **GSC 04/06–30/09:** 194 impressões, 0 cliques. Gate D+90 (≥ 100 impressões/7d) reprovado com 10/7d.
+- **Mercado (DataForSEO EUA, 03/10):** o desejo existe e é pago. "google review removal service"
+  tem 320/mês e CPC US$ 46. Mas o ReviewTactic vende "IA + paga só se remover" a **US$ 99** (nós: US$ 499).
+- **Não fazer** mais SEO, posts ou autopublish aqui sem reabrir a decisão. O `reviewshield` ainda está em
+  `roihub/lib/autopublish-projects.mjs`. Nada foi apagado.
+- **Reabre se** a leitura do banco `:5441` mostrar ≥ 3 CheckerLead externos ou ≥ 1 Client externo
+  conectado. Sem leitura até 31/10/2026, o parar fica valendo.
 
 ## Feito (12/07 — "Publicar 1 artigo novo no blog", agenda do Hub)
 
